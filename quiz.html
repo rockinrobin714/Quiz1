@@ -82,7 +82,8 @@ display:none;
 <div id="div">
 	<h3 id="question">Are you ready for the state capital quiz?</h3>
 <input type="text" id="textBox">
-<p><button id="button">I'm ready!</button></p>
+<p><button id="startButton">I'm ready!</button></p>
+<p><button id="submitButton">Submit</button></p>
 </div>	
 <script>
 
@@ -95,55 +96,45 @@ var myArray=[["What's the capital of Michigan?", "lansing"],["What's the capital
 var usersAnswer = "";
 var currentQuestion = 0;
 var startQuiz = function(){
-	while (currentQuestion<myArray.length){
 		displayNewQuestion();
-		document.getElementById("button").onclick = function() {
-			checkAnswer();
-			currentQuestion++
-			}
+}
+
+document.getElementById("submitButton").onclick = function() {
+	if (currentQuestion<myArray.length-1){
+		checkAnswer();
+		currentQuestion++;
+		displayNewQuestion();
+	} else if (currentQuestion<myArray.length){
+	checkAnswer();
+	currentQuestion++;
+	document.getElementById("submitButton").style.display="none";
+	document.getElementById("textBox").style.display="none";
+	document.getElementById("div").innerHTML= "You got " + numberOfCorrectAnswers + " answer(s) correct!" + "<br />You got the following questions correct:" 
++ "<br />" + correctAnswers + "<br /></ol>You got the following questions incorrect:" + "<br />" + incorrectAnswers;
 	}
 }
+
 var displayNewQuestion = function(){
-	document.getElementById("question").innerHTML = myArray[currentQuestion][0]
+	document.getElementById("question").innerHTML = myArray[currentQuestion][0];
+	document.getElementById("textBox").value="";
 }
 var checkAnswer = function(){
-	document.getElementById("button").onclick = function() {
-			usersAnswer = document.getElementById("textBox").value
-	}
-}
-/*	if(prompt(myArray[i][0]).toLowerCase()===myArray[i][1]){
-    		correctAnswers=correctAnswers + "<li>"+myArray[i][0] +"</li>"
+	usersAnswer = document.getElementById("textBox").value;
+	if (usersAnswer.toLowerCase()===myArray[currentQuestion][1]){
+    		correctAnswers=correctAnswers + "<li>"+myArray[currentQuestion][0] +"</li>"
     		numberOfCorrectAnswers+=1
   		} else {
-    		incorrectAnswers=incorrectAnswers + "<li>"+myArray[i][0] +"</li>"
- 		 }
+    		incorrectAnswers=incorrectAnswers + "<li>"+myArray[currentQuestion][0] +"</li>"
 	}
 }
-document.getElementById("question").innerHTML = myArray[currentQuestion][0];
-  		document.getElementById("button").onclick = function() {
-			usersAnswer = document.getElementById("textBox").value;
-			alert("I'm checking the answer");
-			currentQuestion++;
-*/
-document.getElementById("button").onclick = function() {
+
+document.getElementById("startButton").onclick = function() {
 	document.getElementById("textBox").style.display="inline";
+	document.getElementById("startButton").style.display="none";
+	document.getElementById("submitButton").style.display="inline";
 	startQuiz();
 }
-	
-/*for(i=0;i<myArray.length;i++){
-  if(prompt(myArray[i][0]).toLowerCase()===myArray[i][1]){
-    correctAnswers=correctAnswers + "<li>"+myArray[i][0] +"</li>"
-    numberOfCorrectAnswers+=1
-  } else {
-    incorrectAnswers=incorrectAnswers + "<li>"+myArray[i][0] +"</li>"
-  }
-  
-}
 
-
-document.getElementById("div").innerHTML="You got " + numberOfCorrectAnswers + " answer(s) correct!" + "<br />You got the following questions correct:" 
-+ "<br />" + correctAnswers + "<br /></ol>You got the following questions incorrect:" + "<br />" + incorrectAnswers;
-*/
 </script>
 </body>
 </html>
