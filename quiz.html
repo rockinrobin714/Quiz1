@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+    <title>Quiz</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script type="text/javascript" src="jquery.min.js"></script>
+<style>
+body{font-family:verdana;
+background-color:#2f4f4f;
+}
+div {
+background-color:white;
+font-color:#2f4f4f;
+width:400px;
+height:200px;
+border-radius:10px;
+text-align:center;
+margin:auto;
+margin-top:20px;
+padding:10px;
+}
+ol,li,p,h3,input {
+background-color:white;
+}
+
+button {
+	-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
+	background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-webkit-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-o-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:-ms-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+	background-color:#768d87;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	border-radius:10px;
+	border:1px solid #566963;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:11px 23px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+button:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #6c7c7c), color-stop(1, #768d87));
+	background:-moz-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-webkit-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-o-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:-ms-linear-gradient(top, #6c7c7c 5%, #768d87 100%);
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+	background-color:#6c7c7c;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+input {
+height:20px;
+width:200px;
+padding:3px;
+display:none;
+}
+#submitButton {
+display:none;
+}
+
+</style>
+</head>
+<body>
+<div id="div">
+	<h3 id="question">Are you ready for the state capital quiz?</h3>
+<input type="text" id="textBox">
+<p><button id="button">I'm ready!</button></p>
+</div>	
+<script>
+
+var correctAnswers = "<ol>"
+var incorrectAnswers= "<ol>"
+var numberOfCorrectAnswers = 0
+
+
+var myArray=[["What's the capital of Michigan?", "lansing"],["What's the capital of Alabama?", "montgomery"],["What's the capital of California?", "sacramento"]];
+var usersAnswer = "";
+var currentQuestion = 0;
+var startQuiz = function(){
+	while (currentQuestion<myArray.length){
+		displayNewQuestion();
+		document.getElementById("button").onclick = function() {
+			checkAnswer();
+			currentQuestion++
+			}
+	}
+}
+var displayNewQuestion = function(){
+	document.getElementById("question").innerHTML = myArray[currentQuestion][0]
+}
+var checkAnswer = function(){
+	document.getElementById("button").onclick = function() {
+			usersAnswer = document.getElementById("textBox").value
+	}
+}
+/*	if(prompt(myArray[i][0]).toLowerCase()===myArray[i][1]){
+    		correctAnswers=correctAnswers + "<li>"+myArray[i][0] +"</li>"
+    		numberOfCorrectAnswers+=1
+  		} else {
+    		incorrectAnswers=incorrectAnswers + "<li>"+myArray[i][0] +"</li>"
+ 		 }
+	}
+}
+document.getElementById("question").innerHTML = myArray[currentQuestion][0];
+  		document.getElementById("button").onclick = function() {
+			usersAnswer = document.getElementById("textBox").value;
+			alert("I'm checking the answer");
+			currentQuestion++;
+*/
+document.getElementById("button").onclick = function() {
+	document.getElementById("textBox").style.display="inline";
+	startQuiz();
+}
+	
+/*for(i=0;i<myArray.length;i++){
+  if(prompt(myArray[i][0]).toLowerCase()===myArray[i][1]){
+    correctAnswers=correctAnswers + "<li>"+myArray[i][0] +"</li>"
+    numberOfCorrectAnswers+=1
+  } else {
+    incorrectAnswers=incorrectAnswers + "<li>"+myArray[i][0] +"</li>"
+  }
+  
+}
+
+
+document.getElementById("div").innerHTML="You got " + numberOfCorrectAnswers + " answer(s) correct!" + "<br />You got the following questions correct:" 
++ "<br />" + correctAnswers + "<br /></ol>You got the following questions incorrect:" + "<br />" + incorrectAnswers;
+*/
+</script>
+</body>
+</html>
